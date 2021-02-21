@@ -2,11 +2,19 @@
   width: 380px;
   display: flex;
   flex-direction: column;
+  margin: auto 10px;
   .title {
     margin: 10px 0;
   }
   .buttons {
     display: flex;
     justify-content: space-between;
+    margin: 0 5px;
+    img {
+      min-width: 165px;
+      width: auto;
+      height: 52px;
+      margin: 0 5px;
+    }
   }
 }

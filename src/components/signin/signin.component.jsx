@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import CustomButton from "../custom-button/custombutton.component";
 import FormInput from "../form-input/forminput.component";
+import googleSignin from "../../assets/google_signin.png";
 import "./signin.styles.scss";
 import {
   emailSignInStart,
@@ -35,7 +36,7 @@ const Signin = (props) => {
           type="email"
           value={email}
           handleChange={handleChange}
-          label="email"
+          label="Email"
           required
         />
         <FormInput
@@ -43,18 +44,17 @@ const Signin = (props) => {
           type="password"
           value={password}
           handleChange={handleChange}
-          label="password"
+          label="Password"
           required
         />
         <div className="buttons">
           <CustomButton type="submit">Sign in</CustomButton>
-          <CustomButton
+          <img
+            src={googleSignin}
             type="button"
+            alt="googleSignin"
             onClick={googleSignInStart}
-            isGoogleSignIn
-          >
-            Sign In With Google
-          </CustomButton>
+          />
         </div>
       </form>
     </div>
