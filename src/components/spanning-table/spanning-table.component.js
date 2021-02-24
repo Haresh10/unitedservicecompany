@@ -9,7 +9,7 @@ import CheckSharpIcon from "@material-ui/icons/CheckSharp";
 import Paper from "@material-ui/core/Paper";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import Input from "@material-ui/core/Input";
+import TextField from "@material-ui/core/TextField";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import { SelectOrderRows } from "../../redux/order/order.selectors";
@@ -70,8 +70,8 @@ const SpanningTable = (props) => {
         // padding="checkbox"
       >
         <TableHead>
-          <TableRow>
-            <TableCell align="center" colSpan={5}>
+          <TableRow className={classes.tableHeadTop}>
+            <TableCell align="center" colSpan={6}>
               Details
             </TableCell>
             <TableCell align="right">Price</TableCell>
@@ -101,7 +101,7 @@ const SpanningTable = (props) => {
               <TableCell>{row.desc}</TableCell>
               <TableCell align="right">
                 {currentlyEditing && row.id === editId ? (
-                  <Input
+                  <TextField
                     type="text"
                     name="qty"
                     value={row.qty}
