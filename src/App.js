@@ -9,11 +9,10 @@ import Header from "./components/header/header.component";
 import OrderScreen from "./screens/order-screen/order-screen.component";
 import SigninSignupScreen from "./screens/signin-signup/signin-signup-screen.component";
 
-function App({ currentUser, checkUserSession }) {
+function App({ checkUserSession }) {
   useEffect(() => {
-    console.log(currentUser);
     checkUserSession();
-  }, [checkUserSession]);
+  }, []);
   return (
     <div className="App">
       <Header />

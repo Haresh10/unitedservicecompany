@@ -17,7 +17,7 @@ const Signin = (props) => {
     e.preventDefault();
     const { email, password } = currentUser;
     const { emailSignInStart } = props;
-    emailSignInStart(email, password);
+    await emailSignInStart(email, password);
     setCurrentUser({ email: "", password: "" });
   };
   //handle Change

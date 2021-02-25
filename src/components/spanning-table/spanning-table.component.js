@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -13,15 +13,15 @@ import TextField from "@material-ui/core/TextField";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import { SelectOrderRows } from "../../redux/order/order.selectors";
+import {
+  setSelectedItem,
+  setSelectedItems,
+} from "../../redux/order/order.actions";
 import useStyles from "./spanning-table.styles";
 
-const SpanningTable = (props) => {
+const SpanningTable = ({ setSelectedItem, setSelectedItems, currentRows }) => {
   const [currentlyEditing, setCurrentlyEditing] = useState(false);
-  const [currentRows, setCurrentRows] = useState([]);
   const [editId, setEditId] = useState();
-  useEffect(() => {
-    setCurrentRows(props.rows);
-  }, []);
   const classes = useStyles();
   const TAX_RATE = 0.07;
 
@@ -53,21 +53,21 @@ const SpanningTable = (props) => {
     setEditId(id);
   };
   const rowDeleteHandler = (id) => {
-    setCurrentRows(currentRows.filter((row) => row.id !== id));
+    setSelectedItems(currentRows.filter((row) => row.id !== id));
   };
   const changeHandler = (e) => {
     const { name, value } = e.target;
     const newRows = currentRows.map((row) =>
       row.id === editId ? { ...row, [name]: value } : row
     );
-    setCurrentRows(newRows);
+    setSelectedItems(newRows);
   };
   return (
     <TableContainer component={Paper}>
       <Table
         className={classes.table}
         aria-label="spanning table"
-        // padding="checkbox"
+        //padding="checkbox"
       >
         <TableHead>
           <TableRow className={classes.tableHeadTop}>
@@ -142,6 +142,10 @@ const SpanningTable = (props) => {
   );
 };
 const mapStateToProps = createStructuredSelector({
-  rows: SelectOrderRows,
+  currentRows: SelectOrderRows,
 });
-export default connect(mapStateToProps)(SpanningTable);
+const mapDispatchToProps = (dispatch) => ({
+  setSelectedItem: (item) => dispatch(setSelectedItem(item)),
+  setSelectedItems: (items) => dispatch(setSelectedItems(items)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(SpanningTable);

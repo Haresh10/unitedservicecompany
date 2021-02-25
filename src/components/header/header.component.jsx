@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
-
 import Logo from "../../assets/usc_logo.png";
 import "./header.styles.scss";
 import { SelectCurrentUser } from "../../redux/user/user.selectors";
@@ -23,7 +22,7 @@ const Header = ({ currentUser, signOutStart }) => {
             SIGN OUT
           </div>
         ) : (
-          <Link className="option" to="/login">
+          <Link className="option" to="/">
             SIGN IN
           </Link>
         )}
