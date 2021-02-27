@@ -19,7 +19,30 @@ const INITIAL_STATE = {
       rate: 17.99,
     },
   ],
-  selectedItems: [],
+  custOrder: {
+    selectedItems: [],
+    address: {
+      company: "",
+      address1: "",
+      booth: "",
+      city: "",
+      state: "",
+      zip: "",
+      phone: "",
+      fax: "",
+      ext: "",
+      cname: "",
+      cemail: "",
+      cmobile: "",
+    },
+    paymentDetails: {
+      cctype: "",
+      ccname: "",
+      ccnum: "",
+      ccexpdate: "",
+      cvv: "",
+    },
+  },
 };
 
 const OrderReducer = (state = INITIAL_STATE, action) => {
@@ -27,12 +50,25 @@ const OrderReducer = (state = INITIAL_STATE, action) => {
     case orderActionTypes.SET_SELECTED_ITEM:
       return {
         ...state,
-        selectedItems: [...state.selectedItems, action.payload],
+        custOrder: {
+          ...state.custOrder,
+          selectedItems: [...state.custOrder.selectedItems, action.payload],
+        },
       };
     case orderActionTypes.SET_SELECTED_ITEMS:
       return {
         ...state,
-        selectedItems: action.payload,
+        custOrder: { ...state.custOrder, selectedItems: action.payload },
+      };
+    case orderActionTypes.SET_SHIPPING_ADDRESS:
+      return {
+        ...state,
+        custOrder: { ...state.custOrder, address: action.payload },
+      };
+    case orderActionTypes.SET_PAYMENT_DETAILS:
+      return {
+        ...state,
+        custOrder: { ...state.custOrder, paymentDetails: action.payload },
       };
     default:
       return state;

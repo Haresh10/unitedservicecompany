@@ -14,7 +14,7 @@ const OrderScreen = ({ currentUser, history }) => {
   return (
     <div>
       <OrderInputForm />
-      <SpanningTable />
+      <SpanningTable history={history} />
     </div>
   );
 };

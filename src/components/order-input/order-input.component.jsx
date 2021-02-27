@@ -12,6 +12,7 @@ import {
   SelectInitialItems,
   SelectOrderRows,
 } from "../../redux/order/order.selectors";
+import { priceRow } from "../../utils/utils.component";
 import { setSelectedItem } from "../../redux/order/order.actions";
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -41,8 +42,10 @@ const OrderInputForm = ({ currentRows, initialRows, setSelectedItem }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setOrderItem({ ...orderItem, [name]: value });
+    const numberValue = value.replace(/[^0-9]/g, "");
+    setOrderItem({ ...orderItem, [name]: numberValue });
   };
+
   const handleSubmit = (e) => {
     let isMatch = false;
     e.preventDefault();
@@ -50,11 +53,15 @@ const OrderInputForm = ({ currentRows, initialRows, setSelectedItem }) => {
       if (row.id === orderItem.id) {
         isMatch = true;
       }
-      return "";
+      return isMatch;
     });
-    !isMatch
-      ? setSelectedItem(orderItem)
-      : alert("Order Already Exists!, Please edit the same!");
+    if (isMatch) {
+      alert("Service already exists in your order!");
+    } else {
+      const { qty, rate, disc } = orderItem;
+      const currentPrice = priceRow(qty, rate, disc);
+      setSelectedItem({ ...orderItem, price: currentPrice });
+    }
     setOrderItem(INITIAL_ORDERITEM);
   };
   const handleSelectOptionChange = (e) => {
@@ -75,7 +82,7 @@ const OrderInputForm = ({ currentRows, initialRows, setSelectedItem }) => {
   const { id, qty, disc, unit, rate } = orderItem;
   return (
     <div onSubmit={handleSubmit} className="order-form-container">
-      <form className="order-form" noValidate autoComplete="off">
+      <form className="order-form" autoComplete="off">
         <FormControl variant="filled" className={classes.formControl}>
           <NativeSelect
             variant="filled"
@@ -83,6 +90,7 @@ const OrderInputForm = ({ currentRows, initialRows, setSelectedItem }) => {
             name="desc"
             onChange={handleSelectOptionChange}
             inputProps={{ "aria-label": "services" }}
+            required
           >
             <option value="">Select</option>
             {orderItems.map((row) => (
@@ -96,11 +104,12 @@ const OrderInputForm = ({ currentRows, initialRows, setSelectedItem }) => {
           <TextField
             name="qty"
             label="Area/Qty."
-            type="text"
+            type="number"
             variant="outlined"
             size="small"
             value={qty}
             onChange={handleChange}
+            required
           />
         </FormControl>
         <FormControl>

@@ -8,7 +8,7 @@ import { checkUserSession } from "./redux/user/user.actions";
 import Header from "./components/header/header.component";
 import OrderScreen from "./screens/order-screen/order-screen.component";
 import SigninSignupScreen from "./screens/signin-signup/signin-signup-screen.component";
-
+import Checkout from "./components/checkout/checkout.component";
 function App({ checkUserSession }) {
   useEffect(() => {
     checkUserSession();
@@ -19,6 +19,7 @@ function App({ checkUserSession }) {
       <Switch>
         <Route exact path="/" component={SigninSignupScreen} />
         <Route path="/order" component={OrderScreen} />
+        <Route path="/checkout" component={Checkout} />
       </Switch>
     </div>
   );
