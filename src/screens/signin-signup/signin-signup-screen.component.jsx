@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
-import "./signin-signup-screen.styles.scss";
+import "./signin-signup-screen.styles.js";
 import Signin from "../../components/signin/signin.component";
 import Signup from "../../components/signup/signup.component";
 import { SelectCurrentUser } from "../../redux/user/user.selectors";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
-const SigninSignupScreen = ({ currentUser, match, history }) => {
+import { useHistory } from "react-router-dom";
+const SigninSignupScreen = ({ currentUser }) => {
+  const history = useHistory();
   useEffect(() => {
     if (currentUser) {
       history.push("/order");

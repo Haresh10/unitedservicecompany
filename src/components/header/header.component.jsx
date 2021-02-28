@@ -14,8 +14,8 @@ const Header = ({ currentUser, signOutStart }) => {
         <img className="logo" src={Logo} alt="logo" />
       </Link>
       <div className="options">
-        <Link className="option" to="/contact">
-          CONTACT
+        <Link className="option" to="/order">
+          CREATE ORDER
         </Link>
         {currentUser ? (
           <div className="option" onClick={signOutStart}>

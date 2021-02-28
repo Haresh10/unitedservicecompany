@@ -22,13 +22,7 @@ import {
 
 const steps = ["Shipping address", "Payment details", "Review your order"];
 
-const Checkout = ({
-  history,
-  orderItems,
-  shippingAddress,
-  paymentDetails,
-  setShippingAddress,
-}) => {
+const Checkout = ({ history, orderItems, shippingAddress, paymentDetails }) => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   function getStepContent(step) {
