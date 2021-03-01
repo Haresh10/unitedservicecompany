@@ -59,10 +59,10 @@ const Signin = (props) => {
         </div>
         <Typography variant="body2" color="textSecondary" align="center">
           All your activity will remain private.
-          <p>
-            --------------------------------<strong>or</strong>
-            ---------------------------------
-          </p>
+        </Typography>
+        <Typography variant="body2" color="textSecondary" align="center">
+          --------------------------------<strong>or</strong>
+          ---------------------------------
         </Typography>
 
         <form className={classes.form} onSubmit={handleSubmit}>

@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
-import FormControl from "@material-ui/core/FormControl";
-import NativeSelect from "@material-ui/core/NativeSelect";
 import { useStyles } from "./order-input.styles";
 import {
   SelectInitialItems,
@@ -14,6 +11,7 @@ import {
 } from "../../redux/order/order.selectors";
 import { priceRow } from "../../utils/utils.component";
 import { setSelectedItem } from "../../redux/order/order.actions";
+import Controls from "../re-usables/controls";
 
 const OrderInputForm = ({ currentRows, initialRows, setSelectedItem }) => {
   const classes = useStyles();
@@ -76,96 +74,79 @@ const OrderInputForm = ({ currentRows, initialRows, setSelectedItem }) => {
     <div onSubmit={handleSubmit}>
       <form className={classes.orderForm} autoComplete="off">
         <Grid container spacing={1}>
-          <Grid item xs={2} sm={2}>
-            <FormControl className={classes.formControl}>
-              <NativeSelect
-                className={classes.selectEmpty}
-                variant="filled"
-                value={id || ""}
-                name="desc"
-                onChange={handleSelectOptionChange}
-                inputProps={{ "aria-label": "services" }}
-                required
-              >
-                <option value="">Select</option>
-                {orderItems.map((row) => (
-                  <option value={row.id} key={row.id}>
-                    {row.desc}
-                  </option>
-                ))}
-              </NativeSelect>
-            </FormControl>
+          <Grid item xs={2}>
+            <Controls.Select
+              label="Services"
+              name="desc"
+              value={id}
+              onChange={handleSelectOptionChange}
+              options={orderItems}
+              required
+            />
           </Grid>
-          <Grid item xs={2} sm={2}>
-            <FormControl className={classes.formControl}>
-              <TextField
-                name="qty"
-                label="Area/Qty."
-                type="number"
-                variant="outlined"
-                size="small"
-                value={qty}
-                onChange={handleChange}
-                required
-              />
-            </FormControl>
+          <Grid item xs={2}>
+            <Controls.Input
+              name="qty"
+              label="Area/Qty."
+              type="number"
+              variant="outlined"
+              size="small"
+              value={qty}
+              onChange={handleChange}
+              required
+            />
           </Grid>
-          <Grid item xs={2} sm={2}>
-            <FormControl className={classes.formControl}>
-              <TextField
-                name="disc"
-                label="Discount"
-                variant="outlined"
-                size="small"
-                disabled
-                InputProps={{
-                  readOnly: true,
-                }}
-                value={disc}
-              />
-            </FormControl>
+          <Grid item xs={2}>
+            <Controls.Input
+              name="disc"
+              label="Discount"
+              variant="outlined"
+              size="small"
+              disabled
+              InputProps={{
+                readOnly: true,
+              }}
+              value={disc}
+            />
           </Grid>
-          <Grid item xs={2} sm={2}>
-            <FormControl className={classes.formControl}>
-              <TextField
-                name="unit"
-                label="Unit"
-                variant="outlined"
-                size="small"
-                disabled
-                InputProps={{
-                  readOnly: true,
-                }}
-                value={unit}
-              />
-            </FormControl>
+          <Grid item xs={2}>
+            <Controls.Input
+              name="unit"
+              label="Unit"
+              variant="outlined"
+              size="small"
+              disabled
+              InputProps={{
+                readOnly: true,
+              }}
+              value={unit}
+            />
           </Grid>
-          <Grid item xs={1} sm={2}>
-            <FormControl className={classes.formControl}>
-              <TextField
-                name="rate"
-                label="Price"
-                variant="outlined"
-                size="small"
-                disabled
-                InputProps={{
-                  readOnly: true,
-                }}
-                value={rate}
-              />
-            </FormControl>
+          <Grid item xs={2}>
+            <Controls.Input
+              name="rate"
+              label="Price"
+              variant="outlined"
+              size="small"
+              disabled
+              InputProps={{
+                readOnly: true,
+              }}
+              value={rate}
+            />
           </Grid>
-          <FormControl className={classes.fabControl}>
+          <Grid item xs={2}>
             <Fab
               variant="extended"
               size="medium"
               color="primary"
               aria-label="add"
               type="submit"
+              className={classes.fabControl}
             >
               <AddIcon />
             </Fab>
-          </FormControl>
+          </Grid>
         </Grid>
       </form>
     </div>

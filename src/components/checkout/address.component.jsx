@@ -1,10 +1,9 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
 import { connect } from "react-redux";
 import { setShippingAddress } from "../../redux/order/order.actions";
-
+import { TextField } from "@material-ui/core";
 const AddressForm = (props) => {
   const { shippingAddress, setShippingAddress } = props;
   const {
@@ -30,9 +29,10 @@ const AddressForm = (props) => {
       <Typography variant="h6" gutterBottom>
         Shipping address
       </Typography>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={9}>
+      <Grid container spacing={1} justify="center" alignItems="center">
+        <Grid item xs={9} sm={9} md={9}>
           <TextField
+            variant="outlined"
             required
             id="companyName"
             type="text"
@@ -43,8 +43,9 @@ const AddressForm = (props) => {
             fullWidth
           />
         </Grid>
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={3} md={3}>
           <TextField
+            variant="outlined"
             required
             type="number"
             id="booth"
@@ -57,6 +58,7 @@ const AddressForm = (props) => {
         </Grid>
         <Grid item xs={12}>
           <TextField
+            variant="outlined"
             required
             type="text"
             id="address1"
@@ -67,8 +69,9 @@ const AddressForm = (props) => {
             fullWidth
           />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={4}>
           <TextField
+            variant="outlined"
             required
             id="city"
             type="text"
@@ -77,11 +80,11 @@ const AddressForm = (props) => {
             onChange={handleChange}
             value={city}
             fullWidth
-            autoComplete="shipping address-level2"
           />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={4}>
           <TextField
+            variant="outlined"
             id="state"
             name="state"
             type="text"
@@ -89,11 +92,11 @@ const AddressForm = (props) => {
             onChange={handleChange}
             value={state}
             fullWidth
-            autoComplete="shipping state"
           />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={4}>
           <TextField
+            variant="outlined"
             required
             id="zip"
             name="zip"
@@ -102,11 +105,11 @@ const AddressForm = (props) => {
             onChange={handleChange}
             value={zip}
             fullWidth
-            autoComplete="shipping postal-code"
           />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={4}>
           <TextField
+            variant="outlined"
             required
             id="phone"
             type="text"
@@ -117,8 +120,9 @@ const AddressForm = (props) => {
             fullWidth
           />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={4}>
           <TextField
+            variant="outlined"
             required
             id="fax"
             type="text"
@@ -129,8 +133,9 @@ const AddressForm = (props) => {
             fullWidth
           />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={4}>
           <TextField
+            variant="outlined"
             required
             id="ext"
             type="number"
@@ -141,8 +146,9 @@ const AddressForm = (props) => {
             fullWidth
           />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={4}>
           <TextField
+            variant="outlined"
             required
             id="printname"
             type="text"
@@ -155,6 +161,7 @@ const AddressForm = (props) => {
         </Grid>
         <Grid item xs={12} sm={4}>
           <TextField
+            variant="outlined"
             required
             id="cemail"
             type="email"
@@ -167,6 +174,7 @@ const AddressForm = (props) => {
         </Grid>
         <Grid item xs={12} sm={4}>
           <TextField
+            variant="outlined"
             required
             id="mobile"
             type="number"

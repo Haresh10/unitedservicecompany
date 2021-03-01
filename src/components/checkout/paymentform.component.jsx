@@ -21,6 +21,7 @@ const PaymentForm = ({ paymentDetails, setPaymentDetails }) => {
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <TextField
+            variant="outlined"
             required
             id="cardType"
             label="Card Type"
@@ -35,6 +36,7 @@ const PaymentForm = ({ paymentDetails, setPaymentDetails }) => {
         <Grid item xs={12} md={6}>
           <TextField
             required
+            variant="outlined"
             id="cardName"
             label="Name on card"
             name="ccname"
@@ -48,6 +50,7 @@ const PaymentForm = ({ paymentDetails, setPaymentDetails }) => {
         <Grid item xs={12} md={6}>
           <TextField
             required
+            variant="outlined"
             id="cardNumber"
             label="Card number"
             name="ccnum"
@@ -61,6 +64,7 @@ const PaymentForm = ({ paymentDetails, setPaymentDetails }) => {
         <Grid item xs={12} md={6}>
           <TextField
             required
+            variant="outlined"
             id="expDate"
             label="Expiry date"
             name="ccexpdate"
@@ -74,6 +78,7 @@ const PaymentForm = ({ paymentDetails, setPaymentDetails }) => {
         <Grid item xs={12} md={6}>
           <TextField
             required
+            variant="outlined"
             id="cvv"
             label="CVV"
             helperText="Last three digits on signature strip"
