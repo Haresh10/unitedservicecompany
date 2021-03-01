@@ -24,6 +24,16 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     color: "dodgerblue",
   },
+
+  googleSignin: {
+    width: 180,
+    height: "auto",
+    marginBottom: 17,
+  },
+  facebookSignin: {
+    width: 205,
+    height: "auto",
+  },
 }));
 
 export function Copyright() {

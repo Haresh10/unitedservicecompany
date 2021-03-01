@@ -14,7 +14,7 @@ const Header = ({ currentUser, signOutStart }) => {
         <img className="logo" src={Logo} alt="logo" />
       </Link>
       <div className="options">
-        <Link className="option" to="/order">
+        <Link className="option" to="/">
           CREATE ORDER
         </Link>
         {currentUser ? (
@@ -22,7 +22,7 @@ const Header = ({ currentUser, signOutStart }) => {
             SIGN OUT
           </div>
         ) : (
-          <Link className="option" to="/">
+          <Link className="option" to="/signin">
             SIGN IN
           </Link>
         )}

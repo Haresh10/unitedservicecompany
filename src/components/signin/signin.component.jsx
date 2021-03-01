@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -7,11 +6,11 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { connect } from "react-redux";
-
+import googleSignin from "../../assets/google_signin.png";
+import facebookSignin from "../../assets/facebook_signin.png";
 import { useStyles, Copyright } from "./signin.styles";
 import {
   emailSignInStart,
@@ -22,34 +21,50 @@ import { Link } from "react-router-dom";
 const Signin = (props) => {
   const classes = useStyles();
   const [currentUser, setCurrentUser] = useState({ email: "", password: "" });
-  const { googleSignInStart, history } = props;
+
+  const { googleSignInStart, emailSignInStart, history } = props;
   //handle Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = currentUser;
-    const { emailSignInStart } = props;
-    await emailSignInStart(email, password);
-    history.push("/order");
+    await emailSignInStart(email, password, history);
+
     setCurrentUser({ email: "", password: "" });
   };
   //handle Change
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name);
-    console.log(value);
     setCurrentUser({ ...currentUser, [name]: value });
   };
   const { email, password } = currentUser;
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
+
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
+        <div>
+          <img
+            src={facebookSignin}
+            type="button"
+            alt="facebookSignin"
+            className={classes.facebookSignin}
+          />
+          <img
+            src={googleSignin}
+            type="button"
+            alt="googleSignin"
+            onClick={() => googleSignInStart(history)}
+            className={classes.googleSignin}
+          />
+        </div>
+        <Typography variant="body2" color="textSecondary" align="center">
+          All your activity will remain private.
+          <p>
+            --------------------------------<strong>or</strong>
+            ---------------------------------
+          </p>
         </Typography>
+
         <form className={classes.form} onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
@@ -92,7 +107,7 @@ const Signin = (props) => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link to="#" variant="body2">
                 Forgot password?
               </Link>
             </Grid>
@@ -111,8 +126,8 @@ const Signin = (props) => {
   );
 };
 const mapDispatchToProps = (dispatch) => ({
-  googleSignInStart: () => dispatch(googleSignInStart()),
-  emailSignInStart: (email, password) =>
-    dispatch(emailSignInStart({ email, password })),
+  googleSignInStart: (history) => dispatch(googleSignInStart({ history })),
+  emailSignInStart: (email, password, history) =>
+    dispatch(emailSignInStart({ email, password, history })),
 });
 export default connect(null, mapDispatchToProps)(Signin);
