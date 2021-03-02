@@ -10,9 +10,11 @@ import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+
 import TextField from "@material-ui/core/TextField";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
+import PlayForWorkIcon from "@material-ui/icons/PlayForWork";
 import { SelectOrderRows } from "../../redux/order/order.selectors";
 import { setSelectedItems } from "../../redux/order/order.actions";
 import useStyles from "./spanning-table.styles";
@@ -66,13 +68,14 @@ const SpanningTable = ({ setSelectedItems, history, currentRows }) => {
   const handleCheckout = (e) => {
     history.push("/checkout");
   };
+
   return (
     <div className={classes.tableContainer}>
       <TableContainer component={Paper}>
         <Table
           className={classes.table}
           aria-label="spanning table"
-          //padding="checkbox"
+          padding="checkbox"
         >
           <TableHead>
             <TableRow className={classes.tableHeadTop}>
@@ -92,20 +95,35 @@ const SpanningTable = ({ setSelectedItems, history, currentRows }) => {
                 Price
               </TableCell>
             </TableRow>
-            <TableRow className={classes.tableHead}>
-              <TableCell>Actions</TableCell>
-              <TableCell>Description</TableCell>
-              <TableCell align="right">Area/Qty.</TableCell>
-              <TableCell align="right">Discount %</TableCell>
-              <TableCell align="right">Unit</TableCell>
-              <TableCell align="right">Rate</TableCell>
-              <TableCell align="right">Sum</TableCell>
-            </TableRow>
           </TableHead>
-          <TableBody>
+
+          <TableBody id="pdfdiv">
+            <TableRow className={classes.tableHead}>
+              <TableCell className={classes.hide}>
+                <PlayForWorkIcon style={{ scale: "inherit" }} />
+              </TableCell>
+              <TableCell align="left" className={classes.bodyText}>
+                Description
+              </TableCell>
+              <TableCell align="right" className={classes.bodyText}>
+                Area/Qty.
+              </TableCell>
+              <TableCell align="right" className={classes.bodyText}>
+                Discount %
+              </TableCell>
+              <TableCell align="right" className={classes.bodyText}>
+                Unit
+              </TableCell>
+              <TableCell align="right" className={classes.bodyText}>
+                Rate
+              </TableCell>
+              <TableCell align="right" className={classes.bodyText}>
+                Sum
+              </TableCell>
+            </TableRow>
             {rows.map((row) => (
               <TableRow key={row.id} hover>
-                <TableCell>
+                <TableCell className={classes.hide}>
                   {currentlyEditing && editId === row.id ? (
                     <CheckSharpIcon
                       onClick={() => setCurrentlyEditing(false)}

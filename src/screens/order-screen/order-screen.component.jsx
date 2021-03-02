@@ -5,7 +5,9 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Paper from "@material-ui/core/Paper";
 
 import { useStyles } from "./order-screen.styles";
-
+import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import SpanningTable from "../../components/spanning-table/spanning-table.component";
 import OrderInputForm from "../../components/order-input/order-input.component";
 import { SelectCurrentUser } from "../../redux/user/user.selectors";
@@ -17,10 +19,31 @@ const OrderScreen = ({ currentUser, history }) => {
       history.push("/");
     }
   }, [currentUser]);
+  const printDocument = () => {
+    const input = document.getElementById("pdfdiv");
+    console.log(input);
+    html2canvas(input).then((canvas) => {
+      const imgWidth = 200;
+      const pageHeight = 290;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      const heightLeft = imgHeight;
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      const position = 50;
+      pdf.addImage(imgData, "JPEG", 0, position, imgWidth, imgHeight);
+      pdf.save("download.pdf");
+    });
+  };
   return (
     <div className={classes.layout}>
       <Paper className={classes.paper}>
-        <OrderInputForm />
+        <div className={classes.orderformContainer}>
+          <OrderInputForm />
+          <PictureAsPdfIcon
+            onClick={printDocument}
+            className={classes.pdfIcon}
+          />
+        </div>
         <SpanningTable history={history} />
       </Paper>
       <CssBaseline />

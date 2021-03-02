@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     width: 130,
     height: 40,
     color: "white",
-    fontSize: "20",
+    lineHeight: theme.spacing(7),
   },
   input: {
     width: 130,
@@ -34,12 +34,16 @@ const useStyles = makeStyles((theme) => ({
     color: "#FFFFFF",
     fontSize: 18,
   },
-
+  bodyText: {
+    fontSize: 16,
+  },
   tableHead: {
+    backgroundColor: "#F5F5F5",
     borderRadius: 3,
     border: 0,
     height: 48,
     padding: "0 30px",
+    fontSize: 15,
   },
   tableContainer: {
     display: "flex",

@@ -76,6 +76,7 @@ const OrderInputForm = ({ currentRows, initialRows, setSelectedItem }) => {
         <Grid container spacing={1}>
           <Grid item xs={2}>
             <Controls.Select
+              variant="outlined"
               label="Services"
               name="desc"
               value={id}
@@ -137,7 +138,7 @@ const OrderInputForm = ({ currentRows, initialRows, setSelectedItem }) => {
           </Grid>
           <Grid item xs={2}>
             <Fab
-              variant="extended"
+              variant="outlined"
               size="medium"
               color="primary"
               aria-label="add"

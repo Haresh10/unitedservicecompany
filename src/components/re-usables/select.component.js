@@ -9,8 +9,11 @@ import {
 import React from "react";
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    width: theme.spacing(16),
     marginBottom: theme.spacing(2),
+    
+    "& .MuiSelect-select": {
+      width: theme.spacing(12),
+    },
   },
   input: {
     padding: "11px 14px",
