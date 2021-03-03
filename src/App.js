@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { CssBaseline } from "@material-ui/core";
 
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useHistory, useLocation } from "react-router-dom";
+import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import "./App.css";
 import { checkUserSession } from "./redux/user/user.actions";
@@ -14,7 +15,8 @@ import PageNotFound from "./components/page-not-found/pagenotfound.component";
 import PrivateRoute from "./components/private-route/private-route.component";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import { SelectCurrentUser } from "./redux/user/user.selectors";
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -27,28 +29,43 @@ const theme = createMuiTheme({
     },
   },
 });
-function App({ checkUserSession }) {
+function App({ checkUserSession, currentUser }) {
+  const locationPathNameRef = useRef();
   const history = useHistory();
+  const location = useLocation();
+  locationPathNameRef.current = location.state ? location.state.from : "/";
   useEffect(() => {
-    checkUserSession(history);
+    checkUserSession(history, locationPathNameRef.current);
   }, []);
 
   return (
     <ThemeProvider theme={theme}>
       <Header />
       <Switch>
-        <PrivateRoute exact path="/" component={OrderScreen} />
+        <PrivateRoute
+          exact
+          path="/"
+          component={OrderScreen}
+          currentUser={currentUser}
+        />
         <Route path="/signin" component={Signin} />
         <Route path="/signup" component={Signup} />
-        <PrivateRoute path="/checkout" component={Checkout} />
+        <PrivateRoute
+          path="/checkout"
+          component={Checkout}
+          currentUser={currentUser}
+        />
         <Route path="*" component={PageNotFound} />
       </Switch>
       <CssBaseline />
     </ThemeProvider>
   );
 }
-
-const mapDispatchToProps = (dispatch) => ({
-  checkUserSession: (history) => dispatch(checkUserSession({ history })),
+const mapStateToProps = createStructuredSelector({
+  currentUser: SelectCurrentUser,
 });
-export default connect(null, mapDispatchToProps)(App);
+const mapDispatchToProps = (dispatch) => ({
+  checkUserSession: (history, from) =>
+    dispatch(checkUserSession({ history, from })),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -15,12 +15,12 @@ import {
   signUpSuccess,
 } from "./user.actions";
 
-function* getSnapshotFromUserAuth(userAuth, history) {
+function* getSnapshotFromUserAuth(userAuth, history, from) {
   try {
     const userRef = yield createUserProfileOnFirebase(userAuth);
     const userSnapshot = yield userRef.get();
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
-    history.push("/");
+    history.push(from);
   } catch (error) {
     yield put(call(signInError, error));
   }
@@ -28,7 +28,6 @@ function* getSnapshotFromUserAuth(userAuth, history) {
 function* signUpAndLoginNewUser({
   payload: { email, password, displayName, history },
 }) {
-  console.log(history);
   try {
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
     yield put(signUpSuccess());
@@ -37,29 +36,29 @@ function* signUpAndLoginNewUser({
     yield put(signUpError(error.message));
   }
 }
-function* signInwithGoogle({ payload: { history } }) {
+function* signInwithGoogle({ payload: { history, from } }) {
   try {
     const { user } = yield auth.signInWithPopup(googleProvider);
-    yield call(getSnapshotFromUserAuth, user, history);
+    yield call(getSnapshotFromUserAuth, user, history, from);
   } catch (error) {
     yield put(call(signInError, error));
   }
 }
 function* signInWithEmailAndPassword({
-  payload: { email, password, history },
+  payload: { email, password, history, from },
 }) {
   try {
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
-    yield call(getSnapshotFromUserAuth, user, history);
+    yield call(getSnapshotFromUserAuth, user, history, from);
   } catch (error) {
     yield put(call(signInError, error));
   }
 }
-function* onUserStateChanged({ payload: { history } }) {
+function* onUserStateChanged({ payload: { history, from } }) {
   const userAuth = yield call(getCurrentUser);
   try {
     if (userAuth) {
-      yield call(getSnapshotFromUserAuth, userAuth, history);
+      yield call(getSnapshotFromUserAuth, userAuth, history, from);
     }
   } catch (error) {
     put(call(signInError, error.message));

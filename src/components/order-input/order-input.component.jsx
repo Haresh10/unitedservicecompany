@@ -138,7 +138,7 @@ const OrderInputForm = ({ currentRows, initialRows, setSelectedItem }) => {
           </Grid>
           <Grid item xs={2}>
             <Fab
-              variant="outlined"
+              variant="extended"
               size="medium"
               color="primary"
               aria-label="add"

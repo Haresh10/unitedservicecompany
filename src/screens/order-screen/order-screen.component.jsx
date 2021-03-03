@@ -20,18 +20,19 @@ const OrderScreen = ({ currentUser, history }) => {
     }
   }, [currentUser]);
   const printDocument = () => {
+    const date = new Date();
     const input = document.getElementById("pdfdiv");
-    console.log(input);
     html2canvas(input).then((canvas) => {
       const imgWidth = 200;
-      const pageHeight = 290;
+      //const pageHeight = 290;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      const heightLeft = imgHeight;
+      //const heightLeft = imgHeight;
       const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF("p", "mm", "a4");
-      const position = 50;
-      pdf.addImage(imgData, "JPEG", 0, position, imgWidth, imgHeight);
-      pdf.save("download.pdf");
+      const vpos = 50;
+      const hpos = 4;
+      pdf.addImage(imgData, "JPEG", hpos, vpos, imgWidth, imgHeight);
+      pdf.save(`order_${date}.pdf`);
     });
   };
   return (

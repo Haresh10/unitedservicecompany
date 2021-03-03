@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -21,14 +21,16 @@ import { Link } from "react-router-dom";
 const Signin = (props) => {
   const classes = useStyles();
   const [currentUser, setCurrentUser] = useState({ email: "", password: "" });
-
-  const { googleSignInStart, emailSignInStart, history } = props;
+  const { googleSignInStart, emailSignInStart, history, location } = props;
+  const routeRef = useRef(location.pathname);
+  useEffect(() => {
+    routeRef.current = location.state ? location.state.from : location.pathname;
+  }, [currentUser]);
   //handle Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = currentUser;
-    await emailSignInStart(email, password, history);
-
+    await emailSignInStart(email, password, history, routeRef.current);
     setCurrentUser({ email: "", password: "" });
   };
   //handle Change
@@ -53,7 +55,7 @@ const Signin = (props) => {
             src={googleSignin}
             type="button"
             alt="googleSignin"
-            onClick={() => googleSignInStart(history)}
+            onClick={() => googleSignInStart(history, routeRef.current)}
             className={classes.googleSignin}
           />
         </div>
@@ -126,8 +128,9 @@ const Signin = (props) => {
   );
 };
 const mapDispatchToProps = (dispatch) => ({
-  googleSignInStart: (history) => dispatch(googleSignInStart({ history })),
-  emailSignInStart: (email, password, history) =>
-    dispatch(emailSignInStart({ email, password, history })),
+  googleSignInStart: (history, from) =>
+    dispatch(googleSignInStart({ history, from })),
+  emailSignInStart: (email, password, history, from) =>
+    dispatch(emailSignInStart({ email, password, history, from })),
 });
 export default connect(null, mapDispatchToProps)(Signin);
