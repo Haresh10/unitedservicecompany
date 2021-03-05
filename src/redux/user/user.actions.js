@@ -1,8 +1,12 @@
 import userActionTypes from "./user.types";
 
-export const googleSignInStart = (history) => ({
+export const googleSignInStart = (historyAndLocation) => ({
   type: userActionTypes.GOOGLE_SIGNIN_START,
-  payload: history,
+  payload: historyAndLocation,
+});
+export const facebookSignInStart = (historyAndLocation) => ({
+  type: userActionTypes.FACEBOOK_SIGNIN_START,
+  payload: historyAndLocation,
 });
 export const emailSignInStart = (emailAndPasswordAndHistory) => ({
   type: userActionTypes.EMAIL_SIGNIN_START,

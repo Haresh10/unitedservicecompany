@@ -31,7 +31,7 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: 17,
   },
   facebookSignin: {
-    width: 205,
+    width: 200,
     height: "auto",
   },
 }));

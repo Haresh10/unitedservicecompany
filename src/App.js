@@ -16,16 +16,21 @@ import PrivateRoute from "./components/private-route/private-route.component";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/core";
 import { SelectCurrentUser } from "./redux/user/user.selectors";
+import ResetPassword from "./screens/reset-password/reset-password.component";
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#333996",
+      main: "#115293",
       light: "#3c44b126",
     },
     secondary: {
-      main: "#f83245",
-      light: "#f8324526",
+      main: "#696969",
+      light: "rgba(0, 0, 0, 0.87)",
+    },
+    info: {
+      main: "#041E42",
+      light: "rgba(0, 0, 0, 0.54)",
     },
   },
 });
@@ -50,6 +55,7 @@ function App({ checkUserSession, currentUser }) {
         />
         <Route path="/signin" component={Signin} />
         <Route path="/signup" component={Signup} />
+        <Route path="/recoverAccount" component={ResetPassword} />
         <PrivateRoute
           path="/checkout"
           component={Checkout}

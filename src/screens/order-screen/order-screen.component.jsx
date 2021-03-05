@@ -41,6 +41,7 @@ const OrderScreen = ({ currentUser, history }) => {
         <div className={classes.orderformContainer}>
           <OrderInputForm />
           <PictureAsPdfIcon
+            color="primary"
             onClick={printDocument}
             className={classes.pdfIcon}
           />

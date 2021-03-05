@@ -3,6 +3,7 @@ import userActionTypes from "./user.types";
 import {
   auth,
   googleProvider,
+  facebookProvider,
   createUserProfileOnFirebase,
   getCurrentUser,
 } from "../../firebase/firebase.utils";
@@ -41,7 +42,15 @@ function* signInwithGoogle({ payload: { history, from } }) {
     const { user } = yield auth.signInWithPopup(googleProvider);
     yield call(getSnapshotFromUserAuth, user, history, from);
   } catch (error) {
-    yield put(call(signInError, error));
+    yield put(call(signInError, error.message));
+  }
+}
+function* signInwithFacebook({ payload: { history, from } }) {
+  try {
+    const { user } = yield auth.signInWithPopup(facebookProvider);
+    yield call(getSnapshotFromUserAuth, user, history, from);
+  } catch (error) {
+    yield put(call(signInError, error.message));
   }
 }
 function* signInWithEmailAndPassword({
@@ -75,6 +84,9 @@ function* signOutCurrentUser() {
 function* onSignUpStart() {
   yield takeLatest(userActionTypes.SIGN_UP_START, signUpAndLoginNewUser);
 }
+export function* onFacebookSignInStart() {
+  yield takeLatest(userActionTypes.FACEBOOK_SIGNIN_START, signInwithFacebook);
+}
 export function* onGoogleSignInStart() {
   yield takeLatest(userActionTypes.GOOGLE_SIGNIN_START, signInwithGoogle);
 }
@@ -94,6 +106,7 @@ export function* onSignOutStart() {
 export function* userSagas() {
   yield all([
     call(onGoogleSignInStart),
+    call(onFacebookSignInStart),
     call(onEmailSignInStart),
     call(onCheckUserSession),
     call(onSignOutStart),

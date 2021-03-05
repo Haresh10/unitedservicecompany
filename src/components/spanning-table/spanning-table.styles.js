@@ -24,11 +24,12 @@ const useStyles = makeStyles((theme) => ({
     height: 40,
   },
   tableHeadTop: {
-    background: "linear-gradient(45deg, #4b6cb7 40%, #514a9d 60%)",
+    background: "#115293",
     borderRadius: 3,
     border: 1,
     height: 48,
     padding: "0 30px",
+    opacity: 0.9,
   },
   headerText: {
     color: "#FFFFFF",

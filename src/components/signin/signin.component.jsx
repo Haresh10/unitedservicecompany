@@ -15,13 +15,20 @@ import { useStyles, Copyright } from "./signin.styles";
 import {
   emailSignInStart,
   googleSignInStart,
+  facebookSignInStart,
 } from "../../redux/user/user.actions";
 import { Link } from "react-router-dom";
 
 const Signin = (props) => {
   const classes = useStyles();
   const [currentUser, setCurrentUser] = useState({ email: "", password: "" });
-  const { googleSignInStart, emailSignInStart, history, location } = props;
+  const {
+    googleSignInStart,
+    facebookSignInStart,
+    emailSignInStart,
+    history,
+    location,
+  } = props;
   const routeRef = useRef(location.pathname);
   useEffect(() => {
     routeRef.current = location.state ? location.state.from : location.pathname;
@@ -49,6 +56,7 @@ const Signin = (props) => {
             src={facebookSignin}
             type="button"
             alt="facebookSignin"
+            onClick={() => facebookSignInStart(history, routeRef.current)}
             className={classes.facebookSignin}
           />
           <img
@@ -109,7 +117,11 @@ const Signin = (props) => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link to="#" variant="body2">
+              <Link
+                to="/recoverAccount"
+                variant="body2"
+                className={classes.link}
+              >
                 Forgot password?
               </Link>
             </Grid>
@@ -130,6 +142,8 @@ const Signin = (props) => {
 const mapDispatchToProps = (dispatch) => ({
   googleSignInStart: (history, from) =>
     dispatch(googleSignInStart({ history, from })),
+  facebookSignInStart: (history, from) =>
+    dispatch(facebookSignInStart({ history, from })),
   emailSignInStart: (email, password, history, from) =>
     dispatch(emailSignInStart({ email, password, history, from })),
 });

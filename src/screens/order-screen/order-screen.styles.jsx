@@ -33,7 +33,6 @@ export const useStyles = makeStyles((theme) => ({
     height: theme.spacing(5),
     fontSize: theme.spacing(4.7),
     marginLeft: theme.spacing(1),
-    color: "#3c44b1",
     cursor: "pointer",
   },
 }));
