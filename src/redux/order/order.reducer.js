@@ -1,4 +1,5 @@
 import orderActionTypes from "./order.types";
+import prepareObject from "./order.utils";
 const INITIAL_STATE = {
   allItems: [
     {
@@ -21,27 +22,8 @@ const INITIAL_STATE = {
   ],
   custOrder: {
     selectedItems: [],
-    address: {
-      company: "",
-      address1: "",
-      booth: "",
-      city: "",
-      state: "",
-      zip: "",
-      phone: "",
-      fax: "",
-      ext: "",
-      cname: "",
-      cemail: "",
-      cmobile: "",
-    },
-    paymentDetails: {
-      cctype: "",
-      ccname: "",
-      ccnum: "",
-      ccexpdate: "",
-      cvv: "",
-    },
+    address: {},
+    paymentDetails: {},
   },
 };
 
@@ -63,12 +45,18 @@ const OrderReducer = (state = INITIAL_STATE, action) => {
     case orderActionTypes.SET_SHIPPING_ADDRESS:
       return {
         ...state,
-        custOrder: { ...state.custOrder, address: action.payload },
+        custOrder: {
+          ...state.custOrder,
+          address: prepareObject(action.payload, "address"),
+        },
       };
     case orderActionTypes.SET_PAYMENT_DETAILS:
       return {
         ...state,
-        custOrder: { ...state.custOrder, paymentDetails: action.payload },
+        custOrder: {
+          ...state.custOrder,
+          paymentDetails: prepareObject(action.payload, "paymentDetails"),
+        },
       };
     default:
       return state;

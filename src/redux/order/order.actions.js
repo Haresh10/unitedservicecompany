@@ -16,3 +16,7 @@ export const setPaymentDetails = (paymentDetails) => ({
   type: orderActionTypes.SET_PAYMENT_DETAILS,
   payload: paymentDetails,
 });
+export const setCheckoutFormDetails = (values) => ({
+  type: orderActionTypes.SAVE_ORDER_START,
+  payload: values,
+});

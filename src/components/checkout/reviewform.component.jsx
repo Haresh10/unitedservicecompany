@@ -9,14 +9,14 @@ import { subtotal } from "../../utils/utils.component";
 const Review = (props) => {
   const { orderItems, shippingAddress, paymentDetails } = props;
   const { address1, city, state, zip, cname } = shippingAddress;
-  const { cctype, ccname, ccnum, ccexpdate } = paymentDetails;
+  const { cardType, nameOnCard, cardNumber, expiryDate } = paymentDetails;
   const addresses = [address1, city, state, zip, "USA"];
-  const lastDigits = ccnum ? ccnum.replace(/.(?=.{4})/g, "") : "xxxx";
+  const lastDigits = cardNumber ? cardNumber.replace(/.(?=.{4})/g, "") : "xxxx";
   const payments = [
-    { name: "Card type", detail: cctype },
-    { name: "Card holder", detail: ccname },
+    { name: "Card type", detail: cardType },
+    { name: "Card holder", detail: nameOnCard },
     { name: "Card number", detail: `xxxx-xxxx-xxxx-${lastDigits}` },
-    { name: "Expiry date", detail: ccexpdate },
+    { name: "Expiry date", detail: expiryDate },
   ];
   const classes = useStyles();
   return (

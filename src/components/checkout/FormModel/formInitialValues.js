@@ -1,0 +1,42 @@
+import checkoutFormModel from "./checkoutFormModel";
+const {
+  formField: {
+    company,
+    booth,
+    address1,
+    city,
+    state,
+    zip,
+    phone,
+    fax,
+    ext,
+    cname,
+    cemail,
+    cmobile,
+    cardType,
+    nameOnCard,
+    cardNumber,
+    expiryDate,
+    cvv,
+  },
+} = checkoutFormModel;
+
+export default {
+  [company.name]: "",
+  [booth.name]: "",
+  [address1.name]: "",
+  [city.name]: "",
+  [state.name]: "",
+  [zip.name]: "",
+  [phone.name]: "",
+  [fax.name]: "",
+  [ext.name]: "",
+  [cname.name]: "",
+  [cemail.name]: "",
+  [cmobile.name]: "",
+  [cardType.name]: "",
+  [nameOnCard.name]: "",
+  [cardNumber.name]: "",
+  [expiryDate.name]: "",
+  [cvv.name]: "",
+};

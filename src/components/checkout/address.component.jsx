@@ -1,29 +1,25 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { connect } from "react-redux";
-import { setShippingAddress } from "../../redux/order/order.actions";
-import { TextField } from "@material-ui/core";
+import TextField from "../../components/re-usables/FormsControls/Textfield";
+
 const AddressForm = (props) => {
-  const { shippingAddress, setShippingAddress } = props;
   const {
-    company,
-    address1,
-    booth,
-    city,
-    state,
-    zip,
-    phone,
-    fax,
-    ext,
-    cname,
-    cemail,
-    cmobile,
-  } = shippingAddress;
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setShippingAddress({ ...shippingAddress, [name]: value });
-  };
+    formField: {
+      company,
+      booth,
+      address1,
+      city,
+      state,
+      zip,
+      phone,
+      fax,
+      ext,
+      cname,
+      cemail,
+      cmobile,
+    },
+  } = props;
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -31,165 +27,44 @@ const AddressForm = (props) => {
       </Typography>
       <Grid container spacing={1} justify="center" alignItems="center">
         <Grid item xs={9} sm={9} md={9}>
-          <TextField
-            variant="outlined"
-            required
-            id="companyName"
-            type="text"
-            name="company"
-            label="Exhibiting Company Name"
-            onChange={handleChange}
-            value={company}
-            fullWidth
-          />
+          <TextField name={company.name} label={company.label} />
         </Grid>
         <Grid item xs={3} md={3}>
-          <TextField
-            variant="outlined"
-            required
-            type="number"
-            id="booth"
-            name="booth"
-            label="Booth"
-            onChange={handleChange}
-            value={booth}
-            fullWidth
-          />
+          <TextField name={booth.name} label={booth.label} />
         </Grid>
         <Grid item xs={12}>
-          <TextField
-            variant="outlined"
-            required
-            type="text"
-            id="address1"
-            name="address1"
-            label="Street Address"
-            onChange={handleChange}
-            value={address1}
-            fullWidth
-          />
+          <TextField name={address1.name} label={address1.label} />
         </Grid>
         <Grid item xs={4}>
-          <TextField
-            variant="outlined"
-            required
-            id="city"
-            type="text"
-            name="city"
-            label="City"
-            onChange={handleChange}
-            value={city}
-            fullWidth
-          />
+          <TextField name={city.name} label={city.label} />
         </Grid>
         <Grid item xs={4}>
-          <TextField
-            variant="outlined"
-            id="state"
-            name="state"
-            type="text"
-            label="State"
-            onChange={handleChange}
-            value={state}
-            fullWidth
-          />
+          <TextField name={state.name} label={state.label} />
         </Grid>
         <Grid item xs={4}>
-          <TextField
-            variant="outlined"
-            required
-            id="zip"
-            name="zip"
-            type="number"
-            label="Postal code"
-            onChange={handleChange}
-            value={zip}
-            fullWidth
-          />
+          <TextField name={zip.name} label={zip.label} />
         </Grid>
         <Grid item xs={4}>
-          <TextField
-            variant="outlined"
-            required
-            id="phone"
-            type="text"
-            name="phone"
-            label="Phone"
-            onChange={handleChange}
-            value={phone}
-            fullWidth
-          />
+          <TextField name={phone.name} label={phone.label} />
         </Grid>
         <Grid item xs={4}>
-          <TextField
-            variant="outlined"
-            required
-            id="fax"
-            type="text"
-            name="fax"
-            label="Fax"
-            onChange={handleChange}
-            value={fax}
-            fullWidth
-          />
+          <TextField name={fax.name} label={fax.label} />
         </Grid>
         <Grid item xs={4}>
-          <TextField
-            variant="outlined"
-            required
-            id="ext"
-            type="number"
-            name="ext"
-            label="Ext"
-            onChange={handleChange}
-            value={ext}
-            fullWidth
-          />
+          <TextField name={ext.name} label={ext.label} />
         </Grid>
         <Grid item xs={4}>
-          <TextField
-            variant="outlined"
-            required
-            id="printname"
-            type="text"
-            name="cname"
-            label="Print Name"
-            onChange={handleChange}
-            value={cname}
-            fullWidth
-          />
+          <TextField name={cname.name} label={cname.label} />
         </Grid>
         <Grid item xs={12} sm={4}>
-          <TextField
-            variant="outlined"
-            required
-            id="cemail"
-            type="email"
-            name="cemail"
-            label="Contact's Email"
-            onChange={handleChange}
-            value={cemail}
-            fullWidth
-          />
+          <TextField name={cemail.name} label={cemail.label} />
         </Grid>
         <Grid item xs={12} sm={4}>
-          <TextField
-            variant="outlined"
-            required
-            id="mobile"
-            type="number"
-            name="cmobile"
-            label="Contact's Mobile"
-            onChange={handleChange}
-            value={cmobile}
-            fullWidth
-          />
+          <TextField name={cmobile.name} label={cmobile.label} />
         </Grid>
       </Grid>
     </React.Fragment>
   );
 };
-const mapDispatchToProps = (dispatch) => ({
-  setShippingAddress: (address) => dispatch(setShippingAddress(address)),
-});
-export default connect(null, mapDispatchToProps)(AddressForm);
+
+export default AddressForm;

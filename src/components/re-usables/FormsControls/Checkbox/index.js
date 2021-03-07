@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  CheckBox,
+  Checkbox,
   FormControl,
   FormControlLabel,
   FormLabel,
@@ -27,7 +27,7 @@ const CheckBoxWrapper = ({ name, label, legend, ...otherProps }) => {
       <FormLabel component="legend">{legend}</FormLabel>
       <FormGroup>
         <FormControlLabel
-          control={<CheckBox {...configCheckbox} />}
+          control={<Checkbox {...configCheckbox} />}
           label={label}
         />
       </FormGroup>

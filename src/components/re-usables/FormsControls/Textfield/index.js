@@ -2,11 +2,12 @@ import React from "react";
 import { TextField } from "@material-ui/core";
 import { useField } from "formik";
 
-const TextFieldWrapper = ({ name, ...otherProps }) => {
+const TextFieldWrapper = ({ name, label, ...otherProps }) => {
   const [field, meta] = useField(name);
   const configTextfield = {
     fullWidth: true,
     variant: "outlined",
+    label,
     ...field,
     ...otherProps,
   };
