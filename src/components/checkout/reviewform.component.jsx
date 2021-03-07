@@ -28,7 +28,7 @@ const Review = (props) => {
         {orderItems.map((product) => (
           <ListItem className={classes.listItem} key={product.id}>
             <ListItemText primary={product.desc} />
-            <Typography variant="body2">{product.price}</Typography>
+            <Typography variant="body2">{product.price.toFixed(2)}</Typography>
           </ListItem>
         ))}
         <ListItem className={classes.listItem}>
