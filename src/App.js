@@ -24,14 +24,6 @@ const theme = createMuiTheme({
       main: "#115293",
       light: "#3c44b126",
     },
-    secondary: {
-      main: "#696969",
-      light: "rgba(0, 0, 0, 0.87)",
-    },
-    info: {
-      main: "#041E42",
-      light: "rgba(0, 0, 0, 0.54)",
-    },
   },
 });
 function App({ checkUserSession, currentUser }) {

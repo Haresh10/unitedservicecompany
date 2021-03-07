@@ -20,12 +20,16 @@ const SelectWrapper = ({ name, options, ...otherProps }) => {
     configSelect.error = true;
     configSelect.helperText = meta.error;
   }
-  <TextField {...configSelect}>
-    {Object.keys(options).map((item, pos) => {
-      <MenuItem key={pos} value={item}>
-        {options[item]}
-      </MenuItem>;
-    })}
-  </TextField>;
+  return (
+    <TextField {...configSelect}>
+      {Object.keys(options).map((item, pos) => {
+        return (
+          <MenuItem key={pos} value={item}>
+            {options[item]}
+          </MenuItem>
+        );
+      })}
+    </TextField>
+  );
 };
 export default SelectWrapper;
